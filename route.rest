@@ -1,0 +1,35 @@
+# Gets all songs
+GET http://localhost:3000/music
+
+### // seperates them into two different requests
+
+# Gets one song
+GET http://localhost:3000/music/6459e629c19df7655a28f004
+
+###
+
+# Adds a song
+POST http://localhost:3000/music
+Content-Type: application/json
+
+{
+  "isChecked": "true",
+  "songTitle": "Somewhere Only We Know",
+  "artist": "Keane",
+  "songLink": "https://open.spotify.com/track/0ll8uFnc0nANY35E0Lfxvg?si=40c85505872b42b2",
+  "playlists": "favs"
+}
+
+###
+
+PATCH http://localhost:3000/music/6459ec2a4a1c0c643c85d402
+Content-Type: application/json
+
+{
+  "songTitle": "All I Feel Is Rain"
+}
+
+### 
+
+# Deletes song
+DELETE http://localhost:3000/music/645ad8227e0f4802ff48d86c
