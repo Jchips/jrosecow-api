@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const loginRouter = require('./routes/login');
 
 const app = express(); // app variable that can be used to configure our server
 
@@ -21,6 +22,9 @@ app.use(express.json());
 
 const musicRouter = require('./routes/music');
 app.use('/music', musicRouter); // use this route whenever we query music. ex: http://localhost:3000/music - whenever this url is used
+
+
+app.use('/protected', loginRouter);
 
 const PORT = process.env.PORT || 8000;
 

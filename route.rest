@@ -33,3 +33,13 @@ Content-Type: application/json
 
 # Deletes song
 DELETE http://localhost:3000/music/645ad8227e0f4802ff48d86c
+
+###
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "username": "jrosecow",
+  "password": "tipsycow8"
+}
