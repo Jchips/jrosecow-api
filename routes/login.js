@@ -13,13 +13,12 @@ const user = {
 
 const secretKey = 'tipsycow';
 
+// Hashes my password
 // router.get('/', async (req, res) => {
-//   console.log('here');
 //   try {
 //     const hashedPassword = await bcrypt.hash(user.password, 10);
 //     user.password = hashedPassword;
-//     console.log(user.password);
-//     res.status(201).send(user.password);
+//     res.status(200).send(user.password);
 //   } catch(err) {
 //     res.status(500).send(err.message);
 //   }
@@ -35,11 +34,9 @@ router.get('/', authenticateToken, (req, res) => {
 router.post('/', async (req, res) => {
   try {
     if(await bcrypt.compare(req.body.password, user.password) && user.username === req.body.username) {
-      // res.send('Success');
+      res.send('Success');
       // User authenticated, generate JWT token
       const token = jwt.sign({ userId: user.id }, secretKey, { expiresIn: '1h' });
-      // user.id = user.id + 1;
-      console.log(user.id);
       // Return the token
       res.json({ token });
     } else {
