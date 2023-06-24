@@ -21,6 +21,16 @@ mongoose.connect(process.env.DATABASE_URL, {
 
 app.use(express.json());
 
+// Add Access Control Allow Origin headers
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://jrosecow-api-production.up.railway.app/protected/');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
+
 app.use('/music', musicRouter); // use this route whenever we query music. ex: http://localhost:3000/music - whenever this url is used
 
 app.use('/protected', loginRouter);

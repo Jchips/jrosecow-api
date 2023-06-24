@@ -34,7 +34,7 @@ router.get('/', authenticateToken, (req, res) => {
 router.post('/', async (req, res) => {
   try {
     if(await bcrypt.compare(req.body.password, user.password) && user.username === req.body.username) {
-      res.send('Success');
+      // res.send('Success');
       // User authenticated, generate JWT token
       const token = jwt.sign({ userId: user.id }, secretKey, { expiresIn: '1h' });
       // Return the token
