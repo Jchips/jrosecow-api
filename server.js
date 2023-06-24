@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const musicRouter = require('./routes/music');
 const loginRouter = require('./routes/login');
 
 const app = express(); // app variable that can be used to configure our server
@@ -20,9 +21,17 @@ mongoose.connect(process.env.DATABASE_URL, {
 
 app.use(express.json());
 
-const musicRouter = require('./routes/music');
-app.use('/music', musicRouter); // use this route whenever we query music. ex: http://localhost:3000/music - whenever this url is used
+// Add Access Control Allow Origin headers
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://jrosecow-api-production.up.railway.app/protected/');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
+});
 
+app.use('/music', musicRouter); // use this route whenever we query music. ex: http://localhost:3000/music - whenever this url is used
 
 app.use('/protected', loginRouter);
 
